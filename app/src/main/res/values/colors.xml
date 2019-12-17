@@ -3,4 +3,7 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="LoadingFragmentBackground">#6D6D6D</color>
+    <color name="LoadingFragmentTextColorPrimary">#DADADA</color>
+    <color name="MainAppBackgroundColor">#202020</color>
 </resources>

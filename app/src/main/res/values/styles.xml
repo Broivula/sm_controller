@@ -8,4 +8,18 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="LoadingFragmentStyle" parent="Theme.AppCompat">
+        <item name="android:background">@drawable/fragment_background</item>
+        <item name="android:layout_gravity">bottom|center_horizontal</item>
+    </style>
+
+    <style name="MainAppStyle" parent="Theme.AppCompat">
+        <item name="android:background">@color/MainAppBackgroundColor</item>
+    </style>
+
+    <style name="FragmentTextStyle" parent="Theme.AppCompat">
+        <item name="android:textColor">@color/LoadingFragmentTextColorPrimary</item>
+        <item name="android:textSize">26sp</item>
+    </style>
+
 </resources>

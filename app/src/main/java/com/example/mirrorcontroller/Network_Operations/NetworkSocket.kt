@@ -5,17 +5,19 @@ import android.util.Log
 import com.example.mirrorcontroller.R
 import com.github.nkzawa.socketio.client.IO
 import com.github.nkzawa.socketio.client.Socket
+import kotlinx.coroutines.delay
 import java.io.*
 import java.security.KeyStore
 import java.security.cert.CertificateFactory
 import java.security.cert.X509Certificate
 import javax.net.ssl.*
 
-class NetworkSocket(var app_context: Context) : Runnable {
+object NetworkSocket {
 
-    lateinit var socket: Socket
+     var socket : Socket? = null
 
-    override fun run() {
+
+    suspend fun establishConnection(app_context: Context, loadingComplete: () -> Unit)  {
 
         val cf: CertificateFactory = CertificateFactory.getInstance("X.509")
         val caInput: InputStream = app_context.resources.openRawResource(R.raw.ca)
@@ -41,16 +43,29 @@ class NetworkSocket(var app_context: Context) : Runnable {
         }
 
 
+
         val opts  = IO.Options()
         opts.port = 49256
         opts.sslContext = context
         opts.hostnameVerifier = NullHostNameVerifier()
+
         socket = IO.socket("https://192.168.8.102:3000", opts)
-        socket.connect()
+
+        Log.d("KIKKEL", "socket conncection is ${socket?.connected()}")
+        socket?.connect()
+       while(!socket!!.connected()){
+           delay(2000)
+           Log.d("KIKKEL", "socket conncection is ${socket?.connected()}")
+       }
+
+       // socket?.emit("new_action", "\"{ data: 5 }\"")
+
+       loadingComplete()
+       Log.d("KIKKEL", "socket conncection is ${socket?.connected()}")
 
 
 
-        socket.emit("new_action", "\"{ data: 5 }\"")
+
 
 
 
