@@ -7,14 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.mirrorcontroller.ElementType
-import com.example.mirrorcontroller.Network_Operations.NetworkSocket
-
 import com.example.mirrorcontroller.R
 import com.example.mirrorcontroller.SetupObject
-import com.example.mirrorcontroller.TextElement
 import kotlinx.android.synthetic.main.fragment_loading.*
-import kotlinx.coroutines.runBlocking
 import kotlin.concurrent.thread
 
 /**
