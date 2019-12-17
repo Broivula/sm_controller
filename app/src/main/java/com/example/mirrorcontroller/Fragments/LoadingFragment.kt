@@ -43,7 +43,7 @@ class LoadingFragment : Fragment() {
         rotateloading.start()
 
 
-       thread { SetupObject.setup(context!!, {loadingCompleteCallback()}) }
+       thread { SetupObject.setup(context!!, {loadingCompleteCallback()}, this.view!!) }
 
     }
 
