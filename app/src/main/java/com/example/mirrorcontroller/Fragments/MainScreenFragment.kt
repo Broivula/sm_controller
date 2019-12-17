@@ -10,11 +10,8 @@ import android.util.Log
 import android.view.*
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.example.mirrorcontroller.ElementType
+import com.example.mirrorcontroller.*
 
-import com.example.mirrorcontroller.R
-import com.example.mirrorcontroller.TextElement
-import com.example.mirrorcontroller.TouchController
 import kotlinx.android.synthetic.main.fragment_main_screen.*
 import org.jetbrains.anko.attr
 import org.jetbrains.anko.childrenRecursiveSequence
@@ -39,7 +36,42 @@ class MainScreenFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         view.setOnTouchListener(TouchController.touchHandler)
 
-        val test  = TextElement("TEST", ElementType.PLAIN_TEXT, 100, 100, context)
+
+
+        val list =  Database.getListOfElements()
+
+        val element : TextElement = TextElement(
+            list[0]?.getContent(),
+            list[0]!!.getElementType(),
+            list[0]!!.getPosX(),
+            list[0]!!.getPosY(),
+            context,
+            list[0]!!.getUID()
+
+        )
+
+        element.text =  list[0]?.getContent()
+        element.textSize = 25f
+        element.setTextColor(Color.WHITE)
+        element.x =  list[0]?.getPosX()!!.toFloat()
+        element.y =  list[0]?.getPosY()!!.toFloat()
+        (view as ViewGroup).addView(element)
+
+        /*
+
+            Log.d("KIKKEL", "state of eleme $element")
+            element.text = it?.getContent()
+            element.textSize = 25f
+            element.setTextColor(Color.WHITE)
+            element.x = it?.getPosX()!!.toFloat()
+            element.y = it?.getPosY()!!.toFloat()
+            (view as ViewGroup).addView(element)
+        }
+
+
+        val test  = TextElement("Something else", ElementType.PLAIN_TEXT, 200, 200, context)
+
+
 
         test.text = test._content
         test.setTextColor(Color.CYAN)
@@ -48,13 +80,12 @@ class MainScreenFragment : Fragment() {
         test.y = test._posY.toFloat()
 
 
-
         (view as ViewGroup).addView(test)
+         */
         view.childrenRecursiveSequence().iterator().forEach {
             Log.d("KIKKEL", "current view is $it")
             it.setOnTouchListener(TouchController.touchHandler)
         }
-
 
 
 

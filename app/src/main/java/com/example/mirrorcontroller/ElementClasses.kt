@@ -8,13 +8,14 @@ import android.widget.TextView
 
 
 interface ElementClasses {
-    //fun addToElementList(e: Element) = Database.addElementToDatabase(e)
+
     fun getPostableData() : String
     fun getUID() : Int
     fun getElementType() : ElementType
     fun getPosX() : Int
     fun getPosY() : Int
     fun getContent() : String?
+    fun addToLocalElementList(e: ElementClasses)
 }
 
 enum class ElementType{
@@ -26,9 +27,11 @@ enum class ElementType{
 
 class  TextElement(val _content: String?, val _elementType: ElementType, var _posX: Int, var _posY: Int, context: Context?, private val uid : Int = Database.generateUID()): TextView(context), ElementClasses{
 
-    override fun getUID(): Int {
-        return this.uid
-    }
+    init { this.addToLocalElementList(this) }
+
+    override fun addToLocalElementList(e: ElementClasses) { Database.addToLocalListOfElements(e)}
+
+    override fun getUID(): Int { return this.uid }
 
     override fun getElementType(): ElementType { return _elementType }
 

@@ -17,7 +17,7 @@ object NetworkSocket {
      var socket : Socket? = null
 
 
-    suspend fun establishConnection(app_context: Context, loadingComplete: () -> Unit)  {
+    suspend fun establishConnection(app_context: Context)  {
 
         val cf: CertificateFactory = CertificateFactory.getInstance("X.509")
         val caInput: InputStream = app_context.resources.openRawResource(R.raw.ca)
@@ -58,17 +58,9 @@ object NetworkSocket {
            Log.d("KIKKEL", "socket conncection is ${socket?.connected()}")
        }
 
-       // socket?.emit("new_action", "\"{ data: 5 }\"")
+       Log.d("KIKKEL", "socket conncection code stops now 2. ${socket?.connected()}")
 
-       loadingComplete()
-       Log.d("KIKKEL", "socket conncection is ${socket?.connected()}")
-
-
-
-
-
-
-
+        return
      //   conn.setHostnameVerifier(NullHostNameVerifier())
      //   conn.sslSocketFactory = context.socketFactory
 
