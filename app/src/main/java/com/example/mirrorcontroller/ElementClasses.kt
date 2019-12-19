@@ -2,6 +2,7 @@ package com.example.mirrorcontroller
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 
@@ -15,6 +16,8 @@ interface ElementClasses {
     fun getPosX() : Int
     fun getPosY() : Int
     fun getContent() : String?
+    fun updatePosition(x: Int, y: Int)
+    fun setContent(content: String)
     fun addToLocalElementList(e: ElementClasses)
 }
 
@@ -25,9 +28,9 @@ enum class ElementType{
 }
 
 
-class  TextElement(val _content: String?, val _elementType: ElementType, var _posX: Int, var _posY: Int, context: Context?, private val uid : Int = Database.generateUID()): TextView(context), ElementClasses{
-
-    init { this.addToLocalElementList(this) }
+class  TextElement(var _content: String?, val _elementType: ElementType,
+                   var _posX: Int, var _posY: Int, context: Context?,
+                   private val uid : Int = Database.generateUID()): TextView(context), ElementClasses{
 
     override fun addToLocalElementList(e: ElementClasses) { Database.addToLocalListOfElements(e)}
 
@@ -50,6 +53,13 @@ class  TextElement(val _content: String?, val _elementType: ElementType, var _po
             |"posY": $_posY
             |} """.trimMargin()
     }
+
+    override fun updatePosition(x: Int, y: Int) {
+        this._posX = x
+        this._posY = y
+    }
+
+    override fun setContent(content: String) { this._content = content}
 
     override fun getPostableData() : String {
         return this.toString()

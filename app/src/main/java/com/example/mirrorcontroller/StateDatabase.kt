@@ -1,6 +1,7 @@
 package com.example.mirrorcontroller
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import androidx.room.Database
 
@@ -17,7 +18,7 @@ data class DB_Element(
 @Dao
 interface DB_ElementDao{
     @Query("SELECT * FROM DB_Element")
-    fun getAll(): MutableList<DB_Element>?
+    fun getAll(): MutableList<DB_Element>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(e: DB_Element)

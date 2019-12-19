@@ -2,6 +2,8 @@ package com.example.mirrorcontroller
 
 import android.content.Context
 import android.util.Log
+import android.view.View
+import androidx.lifecycle.AndroidViewModel
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.anko.doAsync
 import kotlin.coroutines.coroutineContext
@@ -44,6 +46,16 @@ object Database{
         parseToDatabaseElements(listOfElements).forEach {
             dataBase?.DB_ElementDao()?.update(it)
         }
+    }
+
+    fun updateLocalElementStatePosition(element: ElementClasses) {
+        listOfElements.find {
+            it?.getUID() == element.getUID()
+        }?.updatePosition(element.getPosX(), element.getPosY())
+    }
+
+    fun updateDatabaseElementState(element: ElementClasses) = doAsync {
+        dataBase?.DB_ElementDao()?.update(parseToSingleDatabaseElement(element))
     }
 
     private fun parseToMobileElements(e : MutableList<DB_Element>?, context: Context) : MutableList<ElementClasses?>{

@@ -36,59 +36,36 @@ class MainScreenFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         view.setOnTouchListener(TouchController.touchHandler)
 
+        createOnScreenElements(view)
 
+    }
+
+
+    private fun createOnScreenElements(view: View){
 
         val list =  Database.getListOfElements()
 
-        val element : TextElement = TextElement(
-            list[0]?.getContent(),
-            list[0]!!.getElementType(),
-            list[0]!!.getPosX(),
-            list[0]!!.getPosY(),
-            context,
-            list[0]!!.getUID()
+        list.map {
+           val ele = TextElement(
+               it?.getContent(),
+               it!!.getElementType(),
+               it!!.getPosX(),
+               it!!.getPosY(),
+               context,
+               it.getUID()
+           )
 
-        )
-
-        element.text =  list[0]?.getContent()
-        element.textSize = 25f
-        element.setTextColor(Color.WHITE)
-        element.x =  list[0]?.getPosX()!!.toFloat()
-        element.y =  list[0]?.getPosY()!!.toFloat()
-        (view as ViewGroup).addView(element)
-
-        /*
-
-            Log.d("KIKKEL", "state of eleme $element")
-            element.text = it?.getContent()
-            element.textSize = 25f
-            element.setTextColor(Color.WHITE)
-            element.x = it?.getPosX()!!.toFloat()
-            element.y = it?.getPosY()!!.toFloat()
-            (view as ViewGroup).addView(element)
+            ele.text = ele._content
+            ele.textSize = 25f
+            ele.setTextColor(Color.WHITE)
+            ele.x = ele._posX.toFloat()
+            ele.y = ele._posY.toFloat()
+            (view as ViewGroup).addView(ele)
         }
 
-
-        val test  = TextElement("Something else", ElementType.PLAIN_TEXT, 200, 200, context)
-
-
-
-        test.text = test._content
-        test.setTextColor(Color.CYAN)
-        test.textSize = 25f
-        test.x = test._posX.toFloat()
-        test.y = test._posY.toFloat()
-
-
-        (view as ViewGroup).addView(test)
-         */
         view.childrenRecursiveSequence().iterator().forEach {
-            Log.d("KIKKEL", "current view is $it")
             it.setOnTouchListener(TouchController.touchHandler)
         }
-
-
-
     }
 
 }
