@@ -11,8 +11,8 @@ data class DB_Element(
     val uid: Int,
     var content: String?,
     val element_type: String,
-    var posX: Int,
-    var posY: Int
+    var posX: Float,
+    var posY: Float
 )
 
 @Dao

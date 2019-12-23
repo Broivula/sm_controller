@@ -13,10 +13,10 @@ interface ElementClasses {
     fun getPostableData() : String
     fun getUID() : Int
     fun getElementType() : ElementType
-    fun getPosX() : Int
-    fun getPosY() : Int
+    fun getPosX() : Float
+    fun getPosY() : Float
     fun getContent() : String?
-    fun updatePosition(x: Int, y: Int)
+    fun updatePosition(x: Float, y: Float)
     fun setContent(content: String)
     fun addToLocalElementList(e: ElementClasses)
 }
@@ -29,7 +29,7 @@ enum class ElementType{
 
 
 class  TextElement(var _content: String?, val _elementType: ElementType,
-                   var _posX: Int, var _posY: Int, context: Context?,
+                   var _posX: Float, var _posY: Float, context: Context?,
                    private val uid : Int = Database.generateUID()): TextView(context), ElementClasses{
 
     override fun addToLocalElementList(e: ElementClasses) { Database.addToLocalListOfElements(e)}
@@ -38,9 +38,9 @@ class  TextElement(var _content: String?, val _elementType: ElementType,
 
     override fun getElementType(): ElementType { return _elementType }
 
-    override fun getPosX(): Int { return _posX }
+    override fun getPosX(): Float { return _posX }
 
-    override fun getPosY(): Int { return _posY }
+    override fun getPosY(): Float { return _posY }
 
     override fun getContent(): String? { return _content }
 
@@ -54,7 +54,7 @@ class  TextElement(var _content: String?, val _elementType: ElementType,
             |} """.trimMargin()
     }
 
-    override fun updatePosition(x: Int, y: Int) {
+    override fun updatePosition(x: Float, y: Float) {
         this._posX = x
         this._posY = y
     }

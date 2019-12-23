@@ -49,7 +49,7 @@ object NetworkSocket {
         opts.sslContext = context
         opts.hostnameVerifier = NullHostNameVerifier()
 
-        socket = IO.socket("https://192.168.8.102:3000", opts)
+        socket = IO.socket("https://192.168.1.77:3000", opts)
 
         Log.d("KIKKEL", "socket conncection is ${socket?.connected()}")
         socket?.connect()

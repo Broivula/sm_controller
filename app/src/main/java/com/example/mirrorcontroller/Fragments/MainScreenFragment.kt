@@ -43,6 +43,14 @@ class MainScreenFragment : Fragment() {
 
     private fun createOnScreenElements(view: View){
 
+        /*
+        val t = TextElement("testing", ElementType.PLAIN_TEXT, 200f, 200f, context )
+        val t2 = TextElement("kakkapylly", ElementType.PLAIN_TEXT, 100f, 100f, context )
+        Database.addElementToDatabase(t)
+        Database.addElementToDatabase(t2)
+         */
+
+
         val list =  Database.getListOfElements()
 
         list.map {
