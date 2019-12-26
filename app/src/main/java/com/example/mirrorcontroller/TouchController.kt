@@ -17,14 +17,15 @@ class TouchController (){
                 val newPosY  = clampYCoordinate(target?.y + motionEvent!!.y - (target.height/2), target.height)
                 target?.x = newPosX
                 target?.y = newPosY
-                target._posX = ((newPosX + target.width / 2)) / DeviceInformation.windowWidth
-                target._posY = ((newPosY  + target.height / 2)) / DeviceInformation.windowHeight
-                POST.postData(target.toString())
+                target._posX = newPosX  / DeviceInformation.windowWidth
+                target._posY = newPosY  / DeviceInformation.windowHeight
+                POST.postDataToSocket(target.toString())
 
                 // when finger is lifted, save the data to the database and local state
                 if(motionEvent.action == MotionEvent.ACTION_UP){
                    Database.updateLocalElementStatePosition(target)
                     Database.updateDatabaseElementState(target)
+                    POST.updateServerDatabase(target.getPostableData())
                 }
             }
 

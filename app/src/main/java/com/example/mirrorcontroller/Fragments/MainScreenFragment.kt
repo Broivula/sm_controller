@@ -18,6 +18,7 @@ import org.jetbrains.anko.childrenRecursiveSequence
 import org.jetbrains.anko.custom.style
 import org.jetbrains.anko.sdk27.coroutines.onTouch
 import org.jetbrains.anko.textColor
+import org.w3c.dom.Text
 
 /**
  * A simple [Fragment] subclass.
@@ -37,18 +38,18 @@ class MainScreenFragment : Fragment() {
         view.setOnTouchListener(TouchController.touchHandler)
 
         createOnScreenElements(view)
-
     }
 
 
     private fun createOnScreenElements(view: View){
 
-        /*
-        val t = TextElement("testing", ElementType.PLAIN_TEXT, 200f, 200f, context )
-        val t2 = TextElement("kakkapylly", ElementType.PLAIN_TEXT, 100f, 100f, context )
+/*
+        val t = TextElement("testing", ElementType.PLAIN_TEXT, 0.5f, 0.5f, context )
+        val t2 = TextElement("kakkapylly", ElementType.PLAIN_TEXT, 0.3f, 0.3f, context )
         Database.addElementToDatabase(t)
         Database.addElementToDatabase(t2)
-         */
+
+ */
 
 
         val list =  Database.getListOfElements()
@@ -66,8 +67,8 @@ class MainScreenFragment : Fragment() {
             ele.text = ele._content
             ele.textSize = 25f
             ele.setTextColor(Color.WHITE)
-            ele.x = ele._posX.toFloat()
-            ele.y = ele._posY.toFloat()
+            ele.x = ele._posX  * DeviceInformation.windowWidth
+            ele.y = ele._posY * DeviceInformation.windowHeight
             (view as ViewGroup).addView(ele)
         }
 
@@ -75,5 +76,6 @@ class MainScreenFragment : Fragment() {
             it.setOnTouchListener(TouchController.touchHandler)
         }
     }
+
 
 }
